@@ -19,12 +19,14 @@ class DialerViewModel: ObservableObject {
   
   let registrationService: RegistrationService
   let networkService: NetworkService
+  let outgoingCallService: OutgoingCallService
   
   private var cancellableSet = Set<AnyCancellable>()
   
-  init(registrationService: RegistrationService, networkService: NetworkService) {
+  init(registrationService: RegistrationService, networkService: NetworkService, outgoingCallService: OutgoingCallService) {
     self.registrationService = registrationService
     self.networkService = networkService
+    self.outgoingCallService = outgoingCallService
     
     setupBindings()
   }
@@ -51,10 +53,19 @@ class DialerViewModel: ObservableObject {
   
   func call() {
     if canDial {
-      // Place call logic here
+      initiateCall()
     } else {
       assertionFailure("Shouldn't be possible to press button. Check if button disabled")
       alertMessage = "Cannot place call. Check registration, network, and number."
+      showAlert = true
+    }
+  }
+  
+  private func initiateCall() {
+    let callResult = outgoingCallService.call(number: phoneNumber)
+    
+    if callResult == false {
+      alertMessage = "Failed to initiate call. Please try again."
       showAlert = true
     }
   }

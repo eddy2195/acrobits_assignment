@@ -2,7 +2,7 @@
 //  SoftphoneDelegate.swift
 //  Acrobits VoIP assignment
 //
-//  Created by Star on 28/10/2025.
+//  Created by Sasha on 28/10/2025.
 //
 
 import Foundation
@@ -13,6 +13,7 @@ class SoftphoneDelegate: NSObject {
   
   let registrationService = RegistrationService()
   let networkService = NetworkService()
+  let outgoingCallService = OutgoingCallService()
   
   private let softphoneObserverProxy = SoftphoneObserverProxyBridge()
   private let licenseKey = "kvotvlf5jgcsejqkc8bji3d90p" // TODO: don't store keys in plain text. Add obfuscator for it.
@@ -59,7 +60,6 @@ class SoftphoneDelegate: NSObject {
 }
 
 extension SoftphoneDelegate: SoftphoneDelegateBridge {
-  
   func onRegistrationStateChanged(state: RegistratorStateType, accountId: String!) {
     print("Registration state changed: \(state.rawValue) for account: \(accountId ?? "nil")")
     registrationService.softphoneRegistrationUpdated(state)
@@ -76,6 +76,7 @@ extension SoftphoneDelegate: SoftphoneDelegateBridge {
   
   func onCallStateChanged(state: CallStateType, call: SoftphoneCallEvent!) {
     print("Call state changed: \(state.rawValue) for call: \(String(describing: call))")
+    outgoingCallService.softphoneCallStateUpdated(state)
   }
   
   func onHoldStateChanged(states: CallHoldStates!, call: SoftphoneCallEvent!) {

@@ -15,7 +15,8 @@ struct ContentView: View {
           DialerView(
             viewModel: DialerViewModel(
               registrationService: softphoneDelegate.registrationService,
-              networkService: softphoneDelegate.networkService
+              networkService: softphoneDelegate.networkService,
+              outgoingCallService: softphoneDelegate.outgoingCallService
             )
           )
                 .tabItem {

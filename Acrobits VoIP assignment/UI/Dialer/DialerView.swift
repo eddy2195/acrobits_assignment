@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DialerView: View {
   @StateObject var viewModel: DialerViewModel
+  @State var showCall: Bool = false
   
   private let keypadNumbers: [[String]] = [
     ["1", "2", "3"],
@@ -39,16 +40,12 @@ struct DialerView: View {
             .cornerRadius(8)
         }
         .padding(.horizontal)
-        // Shrinking number display
-        GeometryReader { geo in
-          Text(viewModel.phoneNumber.isEmpty ? " " : viewModel.phoneNumber)
-            .font(.system(size: 40, weight: .medium, design: .monospaced))
-            .minimumScaleFactor(0.4)
-            .lineLimit(1)
-            .frame(width: geo.size.width, height: 60, alignment: .center)
-            .animation(.easeInOut, value: viewModel.phoneNumber)
-        }
-        .frame(height: 60)
+        
+        Text(viewModel.phoneNumber.isEmpty ? " " : viewModel.phoneNumber)
+          .font(.system(size: 40, weight: .medium, design: .monospaced))
+          .minimumScaleFactor(0.4)
+          .lineLimit(1)
+          .frame(height: 60, alignment: .center)
       }
       .padding(.top, 16)
       Spacer()
@@ -84,6 +81,7 @@ struct DialerView: View {
       // Call button
       Button(action: {
         viewModel.call()
+        showCall = true
       }) {
         Image(systemName: "phone.fill")
           .font(.system(size: 32))
@@ -97,10 +95,18 @@ struct DialerView: View {
     }
     .alert(isPresented: $viewModel.showAlert) {
       Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+    }.sheet(isPresented: $showCall) {
+      OutgoingCallView(
+        viewModel: OutgoingCallViewModel(
+          calleeName: "John Appleseed",
+          calleeNumber: viewModel.phoneNumber,
+          outgoingCallService: viewModel.outgoingCallService
+        )
+      )
     }
   }
 }
 
 #Preview {
-  DialerView(viewModel: DialerViewModel(registrationService: RegistrationService(), networkService: NetworkService()))
+  DialerView(viewModel: DialerViewModel(registrationService: RegistrationService(), networkService: NetworkService(), outgoingCallService: OutgoingCallService()))
 }
