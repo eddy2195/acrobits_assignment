@@ -18,4 +18,5 @@ A simple project that showcases LibSoftphone SDK Integration.
   3. Tests were not executed due to environment issue.
   4. Validation of phone number is very basic and has workaround for test number. It can be easily extended since it is separate class.
   5. For a long time I haven't worked with ObjC enums in Swift code, so in order to mimic it - I've declared same enums in Swift. Not sure if it's best approach. Will need to explore that topic further.
+  6. Services should use protocols to describe interfaces to make mocks easier to implement. That was not implemented due to time constraint.
 </p>
