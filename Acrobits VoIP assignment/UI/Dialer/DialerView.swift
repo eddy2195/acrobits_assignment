@@ -83,12 +83,7 @@ struct DialerView: View {
       .padding(.bottom, 24)
       // Call button
       Button(action: {
-        if viewModel.canDial {
-          // Place call logic here
-        } else {
-          //                    alertMessage = "Cannot place call. Check registration, network, and number."
-          //                    showAlert = true
-        }
+        viewModel.call()
       }) {
         Image(systemName: "phone.fill")
           .font(.system(size: 32))
@@ -103,12 +98,9 @@ struct DialerView: View {
     .alert(isPresented: $viewModel.showAlert) {
       Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
     }
-    .onAppear {
-      // Load displayName and registratorState from settings/services
-    }
   }
 }
 
 #Preview {
-  DialerView(viewModel: DialerViewModel())
+  DialerView(viewModel: DialerViewModel(registrationService: RegistrationService(), networkService: NetworkService()))
 }

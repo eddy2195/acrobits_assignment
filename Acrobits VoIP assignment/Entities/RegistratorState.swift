@@ -5,9 +5,10 @@
 //  Created by Sasha on 28/10/2025.
 //
 
+import Softphone_Swift
 import SwiftUI
 
-enum RegistratorState {
+enum RegistratorState: Int {
   case none, discovering, notRegistered, pushHandshake, registering, registered, unregistering, unauthorized, error
   
   var label: String {

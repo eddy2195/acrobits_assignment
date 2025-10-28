@@ -8,14 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+  let softphoneDelegate = SoftphoneDelegate()
+  
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+          DialerView(
+            viewModel: DialerViewModel(
+              registrationService: softphoneDelegate.registrationService,
+              networkService: softphoneDelegate.networkService
+            )
+          )
+                .tabItem {
+                    Image(systemName: "phone")
+                    Text("Dialer")
+                }
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "gearshape")
+                    Text("Settings")
+                }
         }
-        .padding()
+        .onAppear {
+          
+          softphoneDelegate.start()
+        }
+    }
+}
+
+// Placeholder for the settings tab
+struct SettingsView: View {
+    var body: some View {
+        Text("Settings")
+            .font(.title)
+            .foregroundColor(.secondary)
     }
 }
 
