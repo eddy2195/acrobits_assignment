@@ -47,7 +47,7 @@ class OutgoingCallViewModel: ObservableObject {
           self?.startTimer()
         case .terminated, .error:
           self?.callState = .ended
-          self?.dismiss = true
+          self?.dismiss.toggle()
         default: break // TODO: handle other cases if needed
         }
       }

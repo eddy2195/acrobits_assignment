@@ -66,9 +66,7 @@ struct OutgoingCallView: View {
       .padding(.bottom, 40)
     }
     .onChange(of: viewModel.dismiss) { _, shouldDismiss in
-      if shouldDismiss {
-        dismiss()
-      }
+      dismiss()
    }
   }
   
