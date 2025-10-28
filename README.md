@@ -17,4 +17,5 @@ A simple project that showcases LibSoftphone SDK Integration.
   2. Local user name is being stored into keychain storage to provide security and ease of maintenance. For something complex I would rather use Realm/CoreData.
   3. Tests were not executed due to environment issue.
   4. Validation of phone number is very basic and has workaround for test number. It can be easily extended since it is separate class.
+  5. For a long time I haven't worked with ObjC enums in Swift code, so in order to mimic it - I've declared same enums in Swift. Not sure if it's best approach. Will need to explore that topic further.
 </p>
