@@ -45,7 +45,7 @@ class OutgoingCallViewModel: ObservableObject {
         case .established:
           self?.callState = .connected
           self?.startTimer()
-        case .terminated:
+        case .terminated, .error:
           self?.callState = .ended
           self?.dismiss = true
         default: break // TODO: handle other cases if needed
