@@ -2,7 +2,7 @@
 //  Acrobits_VoIP_assignmentUITestsLaunchTests.swift
 //  Acrobits VoIP assignmentUITests
 //
-//  Created by Star on 28/10/2025.
+//  Created by Sasha on 28/10/2025.
 //
 
 import XCTest

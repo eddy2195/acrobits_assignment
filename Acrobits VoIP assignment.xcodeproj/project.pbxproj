@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F83B545B2EB0B7AD0024A5C6 /* SoftphoneSwiftPackage-saas in Frameworks */ = {isa = PBXBuildFile; productRef = F83B545A2EB0B7AD0024A5C6 /* SoftphoneSwiftPackage-saas */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F83B54012EB0B1580024A5C6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -33,7 +37,7 @@
 		F83B53F52EB0B1570024A5C6 /* Acrobits VoIP assignment */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Acrobits VoIP assignment";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		F83B54032EB0B1580024A5C6 /* Acrobits VoIP assignmentTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F83B545B2EB0B7AD0024A5C6 /* SoftphoneSwiftPackage-saas in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = "Acrobits VoIP assignment";
 			packageProductDependencies = (
+				F83B545A2EB0B7AD0024A5C6 /* SoftphoneSwiftPackage-saas */,
 			);
 			productName = "Acrobits VoIP assignment";
 			productReference = F83B53F32EB0B1570024A5C6 /* Acrobits VoIP assignment.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = F83B53EA2EB0B1570024A5C6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F83B54592EB0B7AD0024A5C6 /* XCRemoteSwiftPackageReference "SoftphoneSwiftPackage-saas" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F83B53F42EB0B1570024A5C6 /* Products */;
 			projectDirPath = "";
@@ -558,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F83B54592EB0B7AD0024A5C6 /* XCRemoteSwiftPackageReference "SoftphoneSwiftPackage-saas" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/acrobits/SoftphoneSwiftPackage-saas.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 25.2.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F83B545A2EB0B7AD0024A5C6 /* SoftphoneSwiftPackage-saas */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F83B54592EB0B7AD0024A5C6 /* XCRemoteSwiftPackageReference "SoftphoneSwiftPackage-saas" */;
+			productName = "SoftphoneSwiftPackage-saas";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F83B53EB2EB0B1570024A5C6 /* Project object */;
 }
