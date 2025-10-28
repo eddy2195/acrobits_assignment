@@ -20,13 +20,20 @@ class DialerViewModel: ObservableObject {
   let registrationService: RegistrationService
   let networkService: NetworkService
   let outgoingCallService: OutgoingCallService
+  let userService: UserService
   
   private var cancellableSet = Set<AnyCancellable>()
   
-  init(registrationService: RegistrationService, networkService: NetworkService, outgoingCallService: OutgoingCallService) {
+  init(
+    registrationService: RegistrationService,
+    networkService: NetworkService,
+    outgoingCallService: OutgoingCallService,
+    userService: UserService
+  ) {
     self.registrationService = registrationService
     self.networkService = networkService
     self.outgoingCallService = outgoingCallService
+    self.userService = userService
     
     setupBindings()
   }
@@ -80,6 +87,12 @@ class DialerViewModel: ObservableObject {
     networkService.$isReachable
       .sink { [weak self] isReachable in
         self?.isNetworkAvailable = isReachable
+      }
+      .store(in: &cancellableSet)
+    
+    userService.$localUsername
+      .sink { [weak self] name in
+        self?.displayName = name
       }
       .store(in: &cancellableSet)
   }

@@ -107,5 +107,12 @@ struct DialerView: View {
 }
 
 #Preview {
-  DialerView(viewModel: DialerViewModel(registrationService: RegistrationService(), networkService: NetworkService(), outgoingCallService: OutgoingCallService()))
+  DialerView(
+    viewModel: DialerViewModel(
+      registrationService: RegistrationService(),
+      networkService: NetworkService(),
+      outgoingCallService: OutgoingCallService(),
+      userService: UserService()
+    )
+  )
 }

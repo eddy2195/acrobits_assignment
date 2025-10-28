@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
   let softphoneDelegate = SoftphoneDelegate()
+  let userService = UserService()
   
   var body: some View {
     TabView {
@@ -16,28 +17,20 @@ struct ContentView: View {
         viewModel: DialerViewModel(
           registrationService: softphoneDelegate.registrationService,
           networkService: softphoneDelegate.networkService,
-          outgoingCallService: softphoneDelegate.outgoingCallService
+          outgoingCallService: softphoneDelegate.outgoingCallService,
+          userService: userService
         )
       )
       .tabItem {
         Image(systemName: "phone")
         Text("Dialer")
       }
-      SettingsView()
+      SettingsView(viewModel: SettingsViewModel(userService: userService))
         .tabItem {
           Image(systemName: "gearshape")
           Text("Settings")
         }
     }
-  }
-}
-
-// Placeholder for the settings tab
-struct SettingsView: View {
-  var body: some View {
-    Text("Settings")
-      .font(.title)
-      .foregroundColor(.secondary)
   }
 }
 

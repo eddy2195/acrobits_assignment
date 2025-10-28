@@ -21,6 +21,7 @@ class SoftphoneDelegate: NSObject {
   
   override init() {
     super.init()
+    
     self.start()
   }
   
