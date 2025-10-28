@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import Softphone_Swift
 
+/// Delegate to handle Softphone SDK events. And emit events for desired services.
 class SoftphoneDelegate: NSObject {
   
   let registrationService = RegistrationService()
@@ -18,7 +19,12 @@ class SoftphoneDelegate: NSObject {
   private let softphoneObserverProxy = SoftphoneObserverProxyBridge()
   private let licenseKey = "kvotvlf5jgcsejqkc8bji3d90p" // TODO: don't store keys in plain text. Add obfuscator for it.
   
-  func start() {
+  override init() {
+    super.init()
+    self.start()
+  }
+  
+  private func start() {
     let license = """
          <root>
              <saas>
@@ -37,7 +43,7 @@ class SoftphoneDelegate: NSObject {
     }
   }
   
-  func registerAccount() {
+  private func registerAccount() {
     let sipAccount = """
          <account id=\"sip\">
              <title>Sip Account</title>
@@ -76,6 +82,7 @@ extension SoftphoneDelegate: SoftphoneDelegateBridge {
   
   func onCallStateChanged(state: CallStateType, call: SoftphoneCallEvent!) {
     print("Call state changed: \(state.rawValue) for call: \(String(describing: call))")
+    outgoingCallService.currentCall = call
     outgoingCallService.softphoneCallStateUpdated(state)
   }
   

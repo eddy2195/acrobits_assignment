@@ -98,7 +98,6 @@ struct DialerView: View {
     }.sheet(isPresented: $showCall) {
       OutgoingCallView(
         viewModel: OutgoingCallViewModel(
-          calleeName: "John Appleseed",
           calleeNumber: viewModel.phoneNumber,
           outgoingCallService: viewModel.outgoingCallService
         )

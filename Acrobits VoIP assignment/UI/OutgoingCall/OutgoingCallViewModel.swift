@@ -23,14 +23,13 @@ class OutgoingCallViewModel: ObservableObject {
   @Published var dismiss: Bool = false
   
   private var timer: AnyCancellable?
-  let calleeName: String
+  var calleeName: String = "Unknown"
   let calleeNumber: String
   let outgoingCallService: OutgoingCallService
   
   private var cancellableSet = Set<AnyCancellable>()
   
-  init(calleeName: String, calleeNumber: String, outgoingCallService: OutgoingCallService) {
-    self.calleeName = calleeName
+  init(calleeNumber: String, outgoingCallService: OutgoingCallService) {
     self.calleeNumber = calleeNumber
     self.outgoingCallService = outgoingCallService
     
@@ -54,6 +53,11 @@ class OutgoingCallViewModel: ObservableObject {
       }
       .store(in: &cancellableSet)
         
+    outgoingCallService.$currentCall
+      .sink { [weak self] call in
+        self?.calleeName = call?.accountName ?? "Unknown"
+      }
+      .store(in: &cancellableSet)
   }
   
   private func startTimer() {
@@ -66,14 +70,21 @@ class OutgoingCallViewModel: ObservableObject {
   
   func hangUp() {
     callState = .ended
-    timer?.cancel()
+    guard let currentCall = outgoingCallService.currentCall else {
+      assertionFailure("No current call to hang up")
+      dismiss = true
+      return
+    }
+    outgoingCallService.hangup(call: currentCall)
   }
   
   func toggleMute() {
     isMuted.toggle()
+    outgoingCallService.muteCall()
   }
   
   func toggleHold() {
-    isOnHold.toggle()
+    isOnHold.toggle() // Should add some listener to update state based on actual call hold status
+    outgoingCallService.holdCurrentCall()
   }
 }

@@ -8,6 +8,7 @@
 import Combine
 import Softphone_Swift
 
+/// Service to monitor registration state.
 class RegistrationService {
   @Published var registrationState: RegistratorState = .none
   

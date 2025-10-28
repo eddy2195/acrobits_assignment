@@ -8,6 +8,7 @@
 import Combine
 import Softphone_Swift
 
+/// Service to monitor network reachability status.
 class NetworkService {
   @Published var isReachable: Bool = false
   
