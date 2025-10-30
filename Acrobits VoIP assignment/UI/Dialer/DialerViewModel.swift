@@ -81,12 +81,14 @@ class DialerViewModel: ObservableObject {
     registrationService.$registrationState
       .sink { [weak self] state in
         self?.registratorState = state
+        self?.updateValidation()
       }
       .store(in: &cancellableSet)
     
     networkService.$isReachable
       .sink { [weak self] isReachable in
         self?.isNetworkAvailable = isReachable
+        self?.updateValidation()
       }
       .store(in: &cancellableSet)
     
